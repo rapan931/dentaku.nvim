@@ -1,0 +1,144 @@
+*dentaku.nvim*    provides calculator!
+
+==============================================================================
+CONTENTS                                                    *dentaku-contents*
+
+  1. INTRO........................................|dentaku-intro|
+  2. INSTALL......................................|dentaku-install|
+  3. COMMANDS.....................................|dentaku-commands|
+  4. MAPPINGS.....................................|dentaku-mappings|
+  4. FUNCTIONS....................................|dentaku-functions|
+
+==============================================================================
+INTRO                                                          *dentaku-intro*
+
+dentaku.nvim is provides calculator
+
+==============================================================================
+INSTALL                                                      *dentaku-install*
+
+* https://github.com/wbthomason/packer.nvim >
+
+    use("rapan931/dentaku.nvim")
+<
+==============================================================================
+COMMANDS                                                    *dentaku-commands*
+
+:Dentaku                                                            *:Dentaku*
+    open the calculator
+
+==============================================================================
+MAPPINGS                                                    *dentaku-mappings*
+
+dentaku.nvim has several default mappings for operating the calculator
+The following is the default mapping for the "dentaku" file type >
+
+    local o = { buffer = true }
+    vim.keymap.set("n", "<Up>", function() move_focus("up") end, o)
+    vim.keymap.set("n", "<Down>", function() move_focus("down") end, o)
+    vim.keymap.set("n", "<Left>", function() move_focus("left") end, o)
+    vim.keymap.set("n", "<Right>", function() move_focus("right") end, o)
+
+    vim.keymap.set("n", "k", function() move_focus("up") end, o)
+    vim.keymap.set("n", "j", function() move_focus("down") end, o)
+    vim.keymap.set("n", "h", function() move_focus("left") end, o)
+    vim.keymap.set("n", "l", function() move_focus("right") end, o)
+
+    vim.keymap.set("n", ".", function() push_key(".") end, o)
+    vim.keymap.set("n", "=", function() push_key("=") end, o)
+    vim.keymap.set("n", "1", function() push_key("1") end, o)
+    vim.keymap.set("n", "2", function() push_key("2") end, o)
+    vim.keymap.set("n", "3", function() push_key("3") end, o)
+    vim.keymap.set("n", "4", function() push_key("4") end, o)
+    vim.keymap.set("n", "5", function() push_key("5") end, o)
+    vim.keymap.set("n", "6", function() push_key("6") end, o)
+    vim.keymap.set("n", "7", function() push_key("7") end, o)
+    vim.keymap.set("n", "8", function() push_key("8") end, o)
+    vim.keymap.set("n", "9", function() push_key("9") end, o)
+    vim.keymap.set("n", "0", function() push_key("0") end, o)
+    vim.keymap.set("n", "+", function() push_key("+") end, o)
+    vim.keymap.set("n", "-", function() push_key("-") end, o)
+    vim.keymap.set("n", "*", function() push_key("*") end, o)
+    vim.keymap.set("n", "/", function() push_key("/") end, o)
+
+    vim.keymap.set("n", "X", function() push_key("*") end, o)
+
+    vim.keymap.set("n", "c", function() push_key("CE") end, o)
+    vim.keymap.set("n", "C", function() push_key("C") end, o)
+    vim.keymap.set("n", "<BS>", function() push_key("DEL") end, o)
+    vim.keymap.set("n", "s", function() push_key("SIGN") end, o)
+
+    vim.keymap.set("n", "<CR>", function() enter() end, o)
+
+    vim.keymap.set("n", "q", "<CMD>bw<CR>", o)
+<
+==============================================================================
+FUNCTIONS                                                  *dentaku-functions*
+
+To use the function, need the following >
+    local dentaku = require("dentaku")
+<
+dentaku.run()                                                  *dentaku.run()*
+    Open the calculator(same |:Dentaku|).
+
+dentaku.move_focus({direction})                         *dentaku.move_focus()*
+    Move focus.
+
+    Parameters:
+        • {direction} Specifies the direction to move the focus.
+            • "up"
+            • "down"
+            • "right"
+            • "left"
+
+dentaku.push_key({key})                                   *dentaku.push_key()*
+    Push the specified key. 
+
+    Parameters:
+        • {key} Specifies the push key.
+            • "1"
+            • "2"
+            • "3"
+            • "4"
+            • "5"
+            • "6"
+            • "7"
+            • "8"
+            • "9"
+            • "0"
+            • "+"
+            • "-"
+            • "*"
+            • "X" Same "*".
+            • "/"
+            • "."
+            • "="
+            • "CE" Clear all.
+            • "C" Clear last number inputted.
+            • "DEL" Delete one digit.
+            • "SIGN" Toggle sign.
+
+dentaku.push_focus_key()                            *dentaku.push_focus_key()*
+    push the key in focus.
+
+dentaku.setup({config?})                                     *dentaku.setup()*
+    Configures the plugin
+
+    Parameters:
+        {config?}  User configuration
+
+    Usage: >
+        -- This sample is default value. If you do not need to
+        -- change the set values, there is no need to call setup
+        require('dentaku').setup({
+            highlight = {
+                focus = "DentakuFocus",
+                flash = "DentakuFlash",
+            },
+            flash = {
+                timeout = 100,
+            },
+        })
+<
+vim:tw=78:ts=4:sw=4:sts=4:et:ft=help:
+
