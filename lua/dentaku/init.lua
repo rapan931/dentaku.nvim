@@ -43,8 +43,8 @@ local win_config = {
   bufpos = { 100, 10 },
   border = "single",
   style = "minimal",
-  title = " Dentaku ",
-  title_pos = "center",
+  -- title = " Dentaku ",
+  -- title_pos = "center",
 }
 
 vim.api.nvim_set_hl(0, "DentakuFocus", { link = "IncSearch" })
