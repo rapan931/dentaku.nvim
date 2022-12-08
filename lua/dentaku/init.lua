@@ -533,7 +533,9 @@ local function run()
 end
 
 local function setup(override_config)
-  config = vim.tbl_extend("force", config, override_config)
+  if type(override_config) == "table" then
+    config = vim.tbl_extend("force", config, override_config)
+  end
 end
 
 local M = {
