@@ -19,4 +19,4 @@ use("rapan931/dentaku.nvim")
 
 ## Other
 
-- The logic for hide the cursor keys is based on [fern.vim](https://github.com/lambdalisue/fern.vim/), Thanks.
+- The logic for hide the cursor is based on [fern.vim](https://github.com/lambdalisue/fern.vim/), Thanks.
