@@ -31,7 +31,8 @@ COMMANDS                                                    *dentaku-commands*
 MAPPINGS                                                    *dentaku-mappings*
 
 dentaku.nvim has several default mappings for operating the calculator
-The following is the default mapping for the "dentaku" file type >
+The following is the default mapping. If you want to disable the default
+values, specify {default_mapping = false} in the |dentaku.setup()| function. >
 
     local o = { buffer = true }
     vim.keymap.set("n", "<Up>", function() move_focus("up") end, o)
@@ -131,6 +132,7 @@ dentaku.setup({config?})                                     *dentaku.setup()*
         -- This sample is default value. If you do not need to
         -- change the set values, there is no need to call setup
         require('dentaku').setup({
+            default_mapping = true,
             highlight = {
                 focus = "DentakuFocus",
                 flash = "DentakuFlash",

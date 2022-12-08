@@ -4,6 +4,7 @@ local pos = {
 }
 
 local config = {
+  default_mapping = true,
   highlight = {
     focus = "DentakuFocus",
     flash = "DentakuFlash",
@@ -407,6 +408,10 @@ end
 local function map(lhs, rhs) vim.keymap.set("n", lhs, rhs, { buffer = true }) end
 
 local function set_keymap()
+  if config.default_mapping ~= true then
+    return
+  end
+
   map("<Up>", function() move_focus("up") end)
   map("<Down>", function() move_focus("down") end)
   map("<Left>", function() move_focus("left") end)
@@ -526,7 +531,10 @@ local function run()
   setpos()
   focus_key(pos.row, pos.col)
 end
-local function setup(override_config) config = vim.tbl_extend("force", config, override_config) end
+
+local function setup(override_config)
+  config = vim.tbl_extend("force", config, override_config)
+end
 
 local M = {
   run = run,
