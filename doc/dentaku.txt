@@ -12,7 +12,7 @@ CONTENTS                                                    *dentaku-contents*
 ==============================================================================
 INTRO                                                          *dentaku-intro*
 
-dentaku.nvim is provides calculator
+dentaku.nvim is provides calculator.
 
 ==============================================================================
 INSTALL                                                      *dentaku-install*
@@ -25,7 +25,7 @@ INSTALL                                                      *dentaku-install*
 COMMANDS                                                    *dentaku-commands*
 
 :Dentaku                                                            *:Dentaku*
-    open the calculator
+    Open the calculator.
 
 ==============================================================================
 MAPPINGS                                                    *dentaku-mappings*
@@ -76,7 +76,7 @@ values, specify {default_mapping = false} in the |dentaku.setup()| function. >
 ==============================================================================
 FUNCTIONS                                                  *dentaku-functions*
 
-To use the function, need the following >
+To use the function, need the following. >
     local dentaku = require("dentaku")
 <
 dentaku.run()                                                  *dentaku.run()*
@@ -120,13 +120,13 @@ dentaku.push_key({key})                                   *dentaku.push_key()*
             • "SIGN" Toggle sign.
 
 dentaku.push_focus_key()                            *dentaku.push_focus_key()*
-    push the key in focus.
+    Push the key in focus.
 
-dentaku.setup({config?})                                     *dentaku.setup()*
+dentaku.setup({config})                                      *dentaku.setup()*
     Configures the plugin
 
     Parameters:
-        {config?}  User configuration
+        {config} User configuration.
 
     Usage: >
         -- This sample is default value. If you do not need to
@@ -143,4 +143,3 @@ dentaku.setup({config?})                                     *dentaku.setup()*
         })
 <
 vim:tw=78:ts=4:sw=4:sts=4:et:ft=help:
-
