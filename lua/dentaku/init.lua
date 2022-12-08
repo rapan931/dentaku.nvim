@@ -294,107 +294,115 @@ local function sign()
   update_formula()
 end
 
-local key_functions = {
-  ["0"] = function() num("0") end,
-  ["1"] = function() num("1") end,
-  ["2"] = function() num("2") end,
-  ["3"] = function() num("3") end,
-  ["4"] = function() num("4") end,
-  ["5"] = function() num("5") end,
-  ["6"] = function() num("6") end,
-  ["7"] = function() num("7") end,
-  ["8"] = function() num("8") end,
-  ["9"] = function() num("9") end,
+local keys = {
+  ["CE"] = {
+    func = function() clear_only_last() end,
+    pos = { row = 1, col = 1 },
+  },
+  ["C"] = {
+    func = function() clear_all() end,
+    pos = { row = 1, col = 2 },
+  },
+  ["DEL"] = {
+    func = function() del() end,
+    pos = { row = 1, col = 3 },
+  },
+  ["/"] = {
+    func = function() operator("/") end,
+    pos = { row = 1, col = 4 },
+  },
 
-  ["+"] = function() operator("+") end,
-  ["-"] = function() operator("-") end,
-  ["*"] = function() operator("*") end,
-  ["X"] = function() operator("*") end,
-  ["/"] = function() operator("/") end,
+  ["7"] = {
+    func = function() num("7") end,
+    pos = { row = 2, col = 1 },
+  },
+  ["8"] = {
+    func = function() num("8") end,
+    pos = { row = 2, col = 2 },
+  },
+  ["9"] = {
+    func = function() num("9") end,
+    pos = { row = 2, col = 3 },
+  },
+  ["*"] = {
+    func = function() operator("*") end,
+    pos = { row = 2, col = 4 },
+  },
+  ["X"] = {
+    func = function() operator("*") end,
+    pos = { row = 2, col = 4 },
+  },
 
-  ["."] = function() dot() end,
-  ["="] = function() equal() end,
+  ["4"] = {
+    func = function() num("4") end,
+    pos = { row = 3, col = 1 },
+  },
+  ["5"] = {
+    func = function() num("5") end,
+    pos = { row = 3, col = 2 },
+  },
+  ["6"] = {
+    func = function() num("6") end,
+    pos = { row = 3, col = 3 },
+  },
+  ["-"] = {
+    func = function() operator("-") end,
+    pos = { row = 3, col = 4 },
+  },
 
-  ["DEL"] = function() del() end,
+  ["1"] = {
+    func = function() num("1") end,
+    pos = { row = 4, col = 1 },
+  },
+  ["2"] = {
+    func = function() num("2") end,
+    pos = { row = 4, col = 2 },
+  },
+  ["3"] = {
+    func = function() num("3") end,
+    pos = { row = 4, col = 3 },
+  },
+  ["+"] = {
+    func = function() operator("+") end,
+    pos = { row = 4, col = 4 },
+  },
 
-  ["CE"] = function() clear_only_last() end,
-  ["C"] = function() clear_all() end,
-
-  ["SIGN"] = function() sign() end,
-}
-
-local key_pos = {
-  ["CE"] = { row = 1, col = 1 },
-  ["C"] = { row = 1, col = 2 },
-  ["DEL"] = { row = 1, col = 3 },
-  ["/"] = { row = 1, col = 4 },
-
-  ["7"] = { row = 2, col = 1 },
-  ["8"] = { row = 2, col = 2 },
-  ["9"] = { row = 2, col = 3 },
-  ["*"] = { row = 2, col = 4 },
-  ["X"] = { row = 2, col = 4 },
-
-  ["4"] = { row = 3, col = 1 },
-  ["5"] = { row = 3, col = 2 },
-  ["6"] = { row = 3, col = 3 },
-  ["-"] = { row = 3, col = 4 },
-
-  ["1"] = { row = 4, col = 1 },
-  ["2"] = { row = 4, col = 2 },
-  ["3"] = { row = 4, col = 3 },
-  ["+"] = { row = 4, col = 4 },
-
-  ["SIGN"] = { row = 5, col = 1 },
-  ["0"] = { row = 5, col = 2 },
-  ["."] = { row = 5, col = 3 },
-  ["="] = { row = 5, col = 4 },
+  ["SIGN"] = {
+    func = function() sign() end,
+    pos = { row = 5, col = 1 },
+  },
+  ["0"] = {
+    func = function() num("0") end,
+    pos = { row = 5, col = 2 },
+  },
+  ["."] = {
+    func = function() dot() end,
+    pos = { row = 5, col = 3 },
+  },
+  ["="] = {
+    func = function() equal() end,
+    pos = { row = 5, col = 4 },
+  },
 }
 
 local push_key = function(key)
-  if key_pos[key] == nil then
+  if keys[key] == nil then
     vim.api.nvim_echo({ { "dentaku.nvim: Invalid key", "ErrorMsg" } }, true, {})
   end
 
-  flash_key(key_pos[key].row, key_pos[key].col)
-  key_functions[key]()
+  flash_key(keys[key].pos.row, keys[key].pos.col)
+  keys[key].func()
   before_key = key
 end
 
-local functions = {
-  {
-    function() push_key("CE") end,
-    function() push_key("C") end,
-    function() push_key("DEL") end,
-    function() push_key("/") end,
-  },
-  {
-    function() push_key("7") end,
-    function() push_key("8") end,
-    function() push_key("9") end,
-    function() push_key("*") end,
-  },
-  {
-    function() push_key("4") end,
-    function() push_key("5") end,
-    function() push_key("6") end,
-    function() push_key("-") end,
-  },
-  {
-    function() push_key("1") end,
-    function() push_key("2") end,
-    function() push_key("3") end,
-    function() push_key("+") end,
-  },
-  {
-    function() push_key("SIGN") end,
-    function() push_key("0") end,
-    function() push_key(".") end,
-    function() push_key("=") end,
-  },
-}
-
-local function push_focus_key() functions[pos.row][pos.col]() end
+local function push_focus_key()
+  for k, v in pairs(keys) do
+    if v.pos.row == pos.row and v.pos.col == pos.col then
+      push_key(k)
+      break
+    end
+  end
+end
 
 local function map(lhs, rhs) vim.keymap.set("n", lhs, rhs, { buffer = true }) end
 
@@ -451,6 +459,9 @@ local function run()
     vim.fn.win_gotoid(winid)
     return
   end
+
+  pos.row = 1
+  pos.col = 1
 
   before_key = "0"
 
