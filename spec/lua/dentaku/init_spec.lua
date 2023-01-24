@@ -2,19 +2,17 @@ local helper = require("vusted.helper")
 local asserts = require("vusted.assert").asserts
 
 local dentaku = helper.require("dentaku")
+local root = helper.find_plugin_root("dentaku")
 
-function helper.setup()
-  local root = helper.find_plugin_root("dentaku")
-  vim.cmd("luafile " .. root .. "/plugin/*.lua")
-end
+function helper.setup() end
 
 function helper.before_each()
-  require("dentaku")
+  vim.cmd("luafile " .. root .. "/plugin/*.lua")
   vim.cmd("Dentaku")
 end
 
 function helper.after_each()
-  vim.cmd("bw!")
+  helper.cleanup()
   helper.cleanup_loaded_modules("dentaku")
 end
 
@@ -219,6 +217,7 @@ describe("Dentaku", function()
       assert.result("3")
     end)
 
+    -- TODO: window calculator is difficult result
     local it_7 = "0 SIGN ="
     it(it_7, function()
       for _, v in ipairs(split(it_7, " ")) do
@@ -228,6 +227,7 @@ describe("Dentaku", function()
       assert.result("0")
     end)
 
+    -- TODO: window calculator is difficult result
     local it_8 = "3 + 5 SIGN = = ="
     it(it_8, function()
       for _, v in ipairs(split(it_8, " ")) do
